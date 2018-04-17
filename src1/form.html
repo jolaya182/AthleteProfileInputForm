@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-8">
+    <div id="form-container">
+      <div class="page-header text-center">
+        <h2> multiform</h2>
+        <!-- links to the nestedj states with relatuve paths -->
+        <div id="status buttons" class="text-center">
+          <a ui-sref-active="active" sref=".profile"><span>1</span>profile</a>
+          <a ui-sref-active="active" sref=".interests"><span>2</span>interests</a>
+          <a ui-sref-active="active" sref=".payment"><span>3</span>payment</a>
+        </div>
+      </div>
+      <!-- use the nbg submit to send the form -->
+      <form id="signup-form" ng-submit="processForm()">
+        <!-- nested views will be injected here -->
+        <div id="forms-views" ui-view></div>
+      </form>
+    </div>
+    <!-- show the form data in the pre  -->
+    <pre>
+      {{formData}}
+    </pre>
+  </div>
+</div>

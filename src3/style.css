@@ -1,0 +1,120 @@
+/* animations */
+.fade{
+  opacity: 0;
+  -webkit-transition: opacity 0.25 ease-in;
+  -moz-transition: opacity 0.25 ease-in;
+  -o-transition: opacity 0.25 ease-in;
+  -ms-transition: opacity 0.25 ease-in;
+  transition: opacity 0.25 ease-in;
+  transition-delay: 0.25;
+}
+
+.fade.in{
+  opacity: 1;
+}
+
+
+.animate-switch-container{
+  position: relative;
+  overflow:hidden;
+  /* height: 500px; */
+  width: 500px;
+  border: solid 1px black;
+  box-shadow:6px 6px 15px gray;
+  padding:10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-size:50px 50px;
+
+}
+
+.animate-switch{
+  padding: 10px;
+  width:100%;
+}
+
+animate-switch.ng-leave{
+  left:0;
+}
+
+.forward .animate-switch.ng-leave.ng-leave-active{
+  left:-100%;
+}
+
+.backward .animate-switch.ng-leave.ng-leave-active{
+  left:100%;
+}
+
+.animate-switch.ng-leave.ng-leave-active{
+  left:-100%;
+}
+
+.forward .animate-switch.ng-enter{
+  left:100%;
+}
+
+.backward .animate-switch.ng-enter{
+  left:-100%;
+}
+
+.animate-switch.ng-enter.ng-enter-active{
+  left:0;
+}
+
+
+/* validation */
+
+.form-validation input.ng-invalid-maxlength{
+  border: 2px solid #d9272d;
+}
+
+
+.length-error{
+  color: #d9272d;
+  display: block; 
+  font-size: 12px;
+  opacity: .8;
+  -webkit-tranisition: all 0.3;
+  -moz-transition:  all 0.3;
+  transition: all 0.3;
+  position: relative;
+  line-height: 18px;
+  padding: 10px 10px 5x 10px;
+  margin: -25px 0 25px 0;
+  background-color: #e3e3e3;
+  border-radius: 0 0 5px 5px;
+}
+
+.note{
+  display: block;
+  font-size: 12px;
+  opacity: .8;
+  -webkit-tranisition: all 0.3;
+  -moz-transition:  all 0.3;
+  transition: all 0.3;
+  position: relative;
+  line-height: 18px;
+}
+
+.note-input{
+  padding: 10px 10px 10px 5px 10px;
+  margin: -25px 0 20px 0;
+  background-color: #e3e3e3;
+  border-radius: 0 0 5px 5px;
+}
+
+.note-input-error, .required-error-banner{
+  background-color: rgba(217, 39, 45, 0.5);
+}
+/*  
+helpers
+allow angularjs to load in the body
+hidding cloaked elements until
+template compile the "!" is important given that there maybe others
+selectors that may come in later that might alter the display 
+*/
+
+[ng\:cloak], [ng-cloak], ng-cloak{
+  display: none;
+}
+

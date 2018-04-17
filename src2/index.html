@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <title>AthleteForm</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
+<script src="app.js"></script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  </head>
+  <body>
+    <main ng-app="formApp" ng-controller="formCtrl" ng-cloak>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>Angularjs 1.6 Multi-step form</h2>
+          </div>
+        </div>  
+        <form name="multiStepForm" class="form-validation" role="form" novalidate>
+          <div class="animate-switch-container" ng-switch on="stage" ng-class="{forward: direction, backward:!direction}" >
+            <div class="animate-switch" ng-switch-default>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>
+                    welcome to the athlete form
+                  </p>
+                  <button type="button" class="btn btn-primary" ng-click="next('stage1')">Start</button>
+                </div>
+              </div>
+            </div>  
+            <div class="animate-switch" ng-switch-when="stage1">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="tb-fname">
+                      First Name:
+                    </label>
+                    <input type="text" class="form-control" id="tb-fname" name="firstName" ng-maxlength="250" ng-model="formParams.firstName" required ng-class="{'input-error': formValidation && multiStepForm.firstName.$error.required}">
+                    <span ng-show="multiStepForm.firstName.$error.maxlength">
+                      Max character length reached.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="tb-lname">Last Name:</label>
+                    <input type="text" class="form-control" id="tb-lname" name="lastName" ng-maxlength="250" ng-model="formParams.lastName" ng-class="{'input-error':formValidation && multiStepForm.lastName.$error.required}" required>
+                    <span ng-show="multiStepForm.lastName.$error.maxlength">
+                      max character length reached.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="tb-email">Email:</label>
+                    <input type="email" class="form-control" id="tb-email" name="email" ng-maxlength="100" ng-model="formParams.email" ng-class="{'input-error': formValidation && multiStepForm.email.$error.required}" ng-model-options="{updatOn:'blur'}" required>
+                    <span ng-show="multiStepForm.email.$error.email">
+                      Incorrect email format.
+                    </span>
+                    <span ng-show="multiStepForm.email.$error.maxlength">
+                      max character length reached.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="tb-cc-email">CC:</label>
+                    <input type="email" class="form-control" id="tb-cc-email" name="ccEmail" ng-maxlength="100" ng-model="formParams.ccEmail" ng-class="{'input-error': formValidation && multiStepForm.ccEmail.$error.email}" ng-model-options="{updatOn:'blur'}">
+                    <span ng-show="multiStepForm.ccEmail.$error.email">
+                      Incorrect email format.
+                    </span>
+                    <span ng-show="multiStepForm.ccEmail.$error.maxlength">
+                      max character length reached.
+                    </span>
+                  </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                  <button type="button" class="btn btn-xs btn-warning" ng-click="addCCEmail()">Add</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div ng-repeat="cc in formParams.ccEmailList">
+                  </div>
+                </div>             
+              </div>
+              <button type="button" class="btn btn-info" ng-click="back('')">Back</button>
+              <button type="button" class="btn btn-primary" ng-click="next('stage2')">Next</button>
+            </div>
+            <div class="animate-switch" ng-switch-when="stage2">
+              <div class="form-group">
+                <label for="ta-body">Message body:</label>
+                <textarea class="form-control" rows="5" id="ta-body" ng-model="formParams.messageBody"></textarea>
+              </div>
+              <button type="button" class="btn btn-info" ng-click="back('stage1')">Back</button>
+              <button type="button" class="btn btn-primary" ng-click="next('stage3')">Next</button>            
+            </div>
+            <div class="animate-switch" ng-switch-when="stage3">
+              <h3>Summary</h3>
+              <p>First name: {{formParams.firstName}}</p>
+              <p>Last name: {{formParams.lastName}}</p>
+              <p>Email: {{formParams.email}} </p>
+              <p>Mesage Body: {{formParams.messageBody}}</p>
+              <button type="button" class="btn btn-info" ng-click="back('stage2')">Back</button>
+              <button type="button" class="btn btn-warning" ng-click="submitForm()">Submit</button>            
+            </div>
+            <div class="animate-switch" ng-switch-when="success">
+              <div class="success-wrap">
+                <h2 class="confirmation-text"></h2>
+                <p>Your message has been sent. <br>you should receive a confirmation email. </p>
+                <div> <button type="button" class="btn btn-success" ng-click="reset()">send another</button></div>
+              </div>
+            </div>
+            <div class="animate-switch" ng-switch-when="error">
+              <div class="error-wrap">
+                <h2 class="confirmation-text">Error</h2>
+                <p>there was an error when attempting to submit your request. <br>Please try again later.  </p>
+                <p><strong>*This will always error until a web service URL is set.*</strong></p>
+                <div> <button type="button" class="btn btn-danger" ng-click="reset()">send another</button></div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">&nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6  col-lg-6">
+            <button type="button" class="btn btn-sm btn-info" ng-click="toggleJSONView =!toggleJSONView">Toggle Object</button>
+            <div>&nbsp;</div>
+            <pre ng-show="toggleJSONView"> {{formParams | json}} </pre>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-12 col-md-12 col-lg-12"> &nbsp;  </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> 
+            <button type="button" class="btn btn-sm btn-info" ng-click="toggleFormErrorsView = !toggleFormErrorsView">Toggle from Errors</button>
+            <div> &nbsp; </div>
+            <ul ng-show="toggleFormErrorsView">
+              <li ng-show="multiStepForm.$invalid">Form invalid  </li>
+              <li ng-show="multiStepForm.$valid">Form Valid </li>
+              <li ng-repeat="(key, errors) in multiStepForm.$error track by $index"><strong>{{key}}</strong> errors
+                <ul>
+                  <li ng-repeat="e in errors"> {{e.$name}} has en error: <strong> {{ key}}</strong>. </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
