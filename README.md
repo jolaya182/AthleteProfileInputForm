@@ -2,8 +2,10 @@
 
 fork/clone this repo
 
-type npm install
+type "npm install"
 
-type in nodemon server/server.js in the commandlin or terminal
+navidate to the src3 folder
 
-opend the file index.html in the src3 folder
+type in "nodemon server/server.js" in the command line or terminal
+
+open the file "index.html" in the src3 folder
