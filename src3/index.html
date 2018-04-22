@@ -163,7 +163,8 @@
             <button type="button" class="btn btn-info" ng-click="back('')">Back</button>
             <button type="button" class="btn btn-primary" ng-click="next('stage2')">Next</button>
           </div>
-          <div class="animate-switch" ng-switch-when="stage2">
+          <div class="animate-switch"  ng-switch-when="stage2"> 
+            <!--  -->
             <div class="form-group">
               <label for="ta-About">About:</label>
               <textarea class="form-control" rows="5" id="ta-About" ng-model="formParams.About"></textarea>
@@ -171,7 +172,7 @@
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="form-group">
-                  <label for="tb-SocialMediaHandles">SocialMediaHandles:</label>
+                  <label for="tb-SocialMediaHandles">Social Media Handles:</label>
                   <input type="text" class="form-control" id="tb-SocialMediaHandles" name="SocialMediaHandles" ng-maxlength="250" ng-model="formParams.SocialMediaHandles"
                     ng-class="{'input-error':formValidation && multiStepForm.SocialMediaHandles.$error.required}" required>
                   <span ng-show="multiStepForm.SocialMediaHandles.$error.maxlength">
@@ -291,9 +292,13 @@
               <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                   <div class="form-group">
-                    <label for="tb-ProfileImage">ProfileImage:</label>
-                    <input type="text" class="form-control" id="tb-ProfileImage" name="ProfileImage" ng-maxlength="250" ng-model="formParams.ProfileImage"
+                    <label for="tb-ProfileImage">Profile Image:</label>
+                    <input type="file" class="form-control" id="tb-ProfileImage" name="ProfileImage"  f="$file"  multiple
+                    ng-files="getTheFiles($files)" 
                       ng-class="{'input-error':formValidation && multiStepForm.ProfileImage.$error.required}" required>
+                      <div class="col-md-6">
+                          <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview"/>
+                       </div>
                     <span ng-show="multiStepForm.ProfileImage.$error.maxlength">
                       max character length reached.
                     </span>
@@ -313,7 +318,7 @@
             <p>DateOfBirth: {{formParams.DateOfBirth}} </p>
             <p>About: {{formParams.About}} </p>
             
-            <p>SocialMediaHandles: {{formParams.SocialMediaHandles}} </p>
+            <p>Social Media Handles: {{formParams.SocialMediaHandles}} </p>
             <p>Location: {{formParams.Location}} </p>
             <p>Team: {{formParams.Team}} </p>
             <p>Association: {{formParams.Association}} </p>
@@ -332,8 +337,13 @@
               <h2 class="confirmation-text"></h2>
               <p>Your profile has been created.</p> 
               <p>List of all Profiles.</p>                 
-                <div ng-repeat=" p in listOfProfiles">
-                <p>{{p}}</p>
+                <div ng-repeat=" p in listOfProfilesImages ">
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="listOfProfilesImagesShow">
+                        <img src="{{p[1]}}" alt="profilePic" >
+                        <p>{{ p[0] }}</p>
+                      </div>
+                    </div>      
                 </div>
               <div>
                 <button type="button" class="btn btn-success" ng-click="reset()">create another</button>

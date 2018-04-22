@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>form</title>
+</head>
+
+<body>
+    <!-- action="http://localhost:3001/post/profilePic"  method="POST"    -->
+  <form id="formApp" enctype="multipart/form-data">
+    FirstName:
+    <!-- <input type="text" name="fName" id="lName"> -->
+    <input type="file" name="myFile" id="myFile">
+    <input type="submit" value="Submit form" onclick="myFunc()">
+  </form>
+  <script>
+    function myFunc(){
+      
+      console.log("document.getElementById(formApp)" , document.getElementById("formApp"))
+      let testForm = document.getElementById("formApp")
+      testForm.onsubmit = function(event){
+        event.preventDefault();
+        let request = new XMLHttpRequest();
+        request.open("POST","http://localhost:3001/post/profilePic", false);
+        // request.setRequestHeader("Content-Type","multipart/form-data")
+        // request.setRequestHeader('Content-Type', "multipart/form-data")
+        let fileInput = document.getElementById("myFile");
+        console.log(fileInput.files[0]);
+        let formData = new FormData( document.getElementById("formApp"));
+        // let formData = new FormData();
+  
+
+        formData.append('image', fileInput.files[0]);
+        request.send(formData);
+        console.log(request.response);
+        
+      }
+      // document.getElementById("myForm").submit()
+
+    }
+  </script>
+</body>
+
+</html>

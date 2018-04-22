@@ -11,8 +11,8 @@ module.exports = {
        let newResult = [];
       //  results = JSON.parse(results);
        for (let index = 0; index < results.length; index++) {
-         const element = results[index].LastName  + ", "+ results[index].FirstName ;
-         newResult.push(element);
+         const element = { "name":results[index].LastName  + ", "+ results[index].FirstName, "imgName": results[index].ProfileImage} ;
+          newResult.push(element);
        }
        res.send(newResult)
      });
